@@ -3,6 +3,7 @@ use cli::Subcommands;
 
 mod bam_concordance;
 mod cli;
+mod common;
 fn main() {
     let args = cli::Cli::parse();
 

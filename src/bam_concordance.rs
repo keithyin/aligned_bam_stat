@@ -2,7 +2,7 @@ use std::{collections::HashMap, fs, io::{BufReader, BufWriter, Write}, sync::Arc
 use crossbeam;
 use crate::cli::BamConcordanceArgs;
 use rust_htslib::bam::{self, ext::BamRecordExtensions, record::Cigar, Read};
-use common::{self, bam_ext::BamRecordExt, file_reader::{bed_reader::BedInfo, fasta_reader::{self, FastaFile}, vcf_reader::VcfInfo}, pb_tools::{get_spin_pb, DEFAULT_INTERVAL}};
+use crate::common::{bam_ext::BamRecordExt, file_reader::{bed_reader::BedInfo, fasta_reader::FastaFile, vcf_reader::VcfInfo}, pb_tools::{get_spin_pb, DEFAULT_INTERVAL}};
 
 
 struct RecordReplica {
@@ -412,7 +412,7 @@ pub fn bam_concordance(args: &BamConcordanceArgs) -> anyhow::Result<()> {
 mod test {
     use std::{fs, io::BufReader};
 
-    use common::file_reader::{fasta_reader::FastaFile, vcf_reader::VcfInfo};
+    use crate::common::file_reader::{fasta_reader::FastaFile, vcf_reader::VcfInfo};
     use rust_htslib::bam::{self, ext::BamRecordExtensions, Read};
 
     use crate::{bam_concordance::{stat_record_core, RecordReplica}, cli::BamConcordanceArgs};
