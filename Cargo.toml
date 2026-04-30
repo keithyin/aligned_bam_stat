@@ -1,0 +1,33 @@
+[package]
+name = "bam_stat"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+clap = {version="4.4.14", features=["derive"]}
+bam = "0.1.4"
+indicatif= {version="0.17.7", features = ["rayon"]}
+colored = "2.0.4"
+chrono = "0.4.35"
+glob = "0.3.1"
+regex = "1.10.3"
+rayon="1.8.1"
+crossbeam = "0.8.4"
+
+tracing = "0.1.40"
+tracing-subscriber = {version="0.3.18", features=["json", "env-filter", "fmt", "time", "local-time"]}
+time="0.3.34"
+
+uuid = {version="1.7.0", features=["v1", "v4"]}
+lazy_static = "1.4.0"
+bio = "1.6.0"
+polars = {version = "0.36.2", features = ["lazy", "rank", "strings", "concat_str", "dtype-struct", "log", "round_series", "bigidx", "cum_agg"]}
+rust-htslib = "0.47.0"
+anyhow="1.0.81"
+num_cpus = "1.13.0"
+
+ndarray = "0.15.6"
+
+common = {path="../common"}
