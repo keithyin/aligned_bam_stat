@@ -4,7 +4,7 @@ BAM 对齐一致性（Concordance）统计工具。
 
 ## 简介
 
-对 BAM 文件中每条 Read 的 CIGAR 对齐信息逐碱基分析，排除参考区域（HC Regions）和已知变异位点（HC Variants）的干扰，输出每条 Read 的匹配/错配/插入/删除等统计指标及一致性评分。
+对 BAM 文件中每条 Read 的 CIGAR 对齐信息逐碱基分析，仅考虑高置信区域（HC Regions），同时排除已知变异位点（HC Variants）的干扰，输出每条 Read 的匹配/错配/插入/删除等统计指标及一致性评分。
 
 ## 用法
 
@@ -134,11 +134,11 @@ Stat 结构体的核心字段：
 | `query_converage()` | `(ins_bp + m + mm) / q_len` | 查询序列覆盖率：被计入对齐的查询碱基数 / 序列总长 |
 | `predictedConcordance` | `rq` 字段的值 | Read 自身报告的预测一致性（来自 aux 标签 `rq`） |
 
-### HC（Hide / Exclude from Concordance）机制
+### High Confidence 机制
 
 两条独立的过滤规则：
 
-1. **HC Regions（BED）**：用户通过 `--hcregions` 指定的区域，这些区域内的碱基不计入一致性统计（用于排除低质量比对区域）
+1. **HC Regions（BED）**：用户通过 `--hcregions` 指定的区域，仅这些区域内的碱基计入一致性统计（用于排除低质量比对区域）
 2. **HC Variants（VCF）**：用户通过 `--hcvariants` 指定的已知变异位点，这些位点及其对应的同源多聚体相邻位点被排除，避免已知杂合/同源多聚体位点污染一致性评分
 
 两个条件用 `&=` 连接——碱基必须同时满足"在 HC 区域内"且"不在变异位点"才算有效。
